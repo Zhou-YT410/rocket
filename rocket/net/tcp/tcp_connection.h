@@ -8,7 +8,7 @@
 #include "rocket/net/tcp/tcp_buffer.h"
 #include "rocket/net/io_thread.h"
 #include "rocket/net/coder/abstract_coder.h"
-
+#include "rocket/net/rpc/rpc_dispatcher.h"
 
 namespace rocket {
 
@@ -31,7 +31,7 @@ class TcpConnection {
 
 
  public:
-  TcpConnection(EventLoop* event_loop, int fd, int buffer_size, NetAddr::s_ptr peer_addr, TcpConnectionType type = TcpConnectionByServer);
+  TcpConnection(EventLoop* event_loop, int fd, int buffer_size, NetAddr::s_ptr peer_addr, NetAddr::s_ptr local_addr, TcpConnectionType type = TcpConnectionByServer);
 
   ~TcpConnection();
 
@@ -62,6 +62,11 @@ class TcpConnection {
 
   void pushReadMessage(const std::string& req_id, std::function<void(AbstractProtocol::s_ptr)> done);
 
+  NetAddr::s_ptr getLocalAddr();
+
+  NetAddr::s_ptr getPeerAddr();
+
+
 
 
  private:
@@ -91,6 +96,8 @@ class TcpConnection {
 
   // key 为 req_id
   std::map<std::string, std::function<void(AbstractProtocol::s_ptr)>> m_read_dones;
+
+  
 
 
 };
