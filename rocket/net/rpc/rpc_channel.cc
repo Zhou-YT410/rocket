@@ -132,7 +132,6 @@ void RpcChannel::CallMethod(const google::protobuf::MethodDescriptor* method,
     });
 
   });
-
 }
 
 void RpcChannel::Init(controller_s_ptr controller, message_s_ptr req, message_s_ptr res, closure_s_ptr done) {

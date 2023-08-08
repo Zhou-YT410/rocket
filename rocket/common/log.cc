@@ -59,7 +59,7 @@ void Logger::syncLoop() {
   tmp_vec.clear();
 
   // 同步 m_app_buffer 到 app_async_logger 的buffer队尾
-  std::vector<std::string> tmp_vec2;
+  std::vector<std::string> tmp_vec2; 
   ScopeMutex<Mutex> lock2(m_app_mutex);
   tmp_vec2.swap(m_app_buffer);
   lock.unlock();
